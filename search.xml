@@ -1,6 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <search>
   <entry>
+    <title><![CDATA[Dubbo SPI 扩展实现测试]]></title>
+    <url>%2F2019%2F06%2F08%2Fdubbo-spi-test%2F</url>
+    <content type="text"><![CDATA[Dubbo SPI 测试 Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，官方文档 JDK 标准 SPI 会主动实例化扩展点的所有实现，如果扩展点初始化很耗时，而且如果该扩展点被加载后不使用，也是资源浪费 通过 setter 方式，实现了 IOC &amp; AOP ExtensionLoader 的简单测试HelloService 接口 123456789101112131415package com.lankio.learning.dubbo;import org.apache.dubbo.common.URL;import org.apache.dubbo.common.extension.Adaptive;import org.apache.dubbo.common.extension.SPI;@SPI(&quot;dennis&quot;)public interface HelloService &#123; String sayHello(String hello); @Adaptive String sayHello(URL url, String hello);&#125; HelloService 接口的普通实现 1234567891011121314public class HelloServiceImpl implements HelloService &#123; @Override public String sayHello(String hello) &#123; return &quot;Hello! &quot; + hello; &#125; @Override public String sayHello(URL url, String hello) &#123; return url + &quot;, Hello! &quot; + hello; &#125;&#125; HelloService 接口的自适应扩展实现 12345678910111213141516@Adaptive // Annotation mustpublic class AdaptiveHelloServiceImpl implements HelloService &#123; @Override public String sayHello(String hello) &#123; return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(hello); &#125; @Override public String sayHello(URL url, String hello) &#123; return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(url, hello); &#125;&#125; 配置文件 META-INF/dubbo/com.lankio.learning.dubbo.HelloService 123456# HelloService 默认扩展实现dennis=com.lankio.learning.dubbo.service.HelloServiceImpl# 人工手动实现的自适应扩展实现，注释掉该实现，ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension() 会# 自动生成自适应扩展实现adaptive=com.lankio.learning.dubbo.service.AdaptiveHelloServiceImpl ExtensionLoader 测试 1234567891011121314151617public class ExtensionLoaderTest &#123; public static void main(String[] args) &#123; // General service implement HelloService helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getExtension(&quot;dennis&quot;); System.out.println(helloService.getClass().getCanonicalName()); System.out.println(helloService.sayHello(&quot;DENNIS&quot;)); // Adaptive service implement helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension(); System.out.println(helloService.getClass().getCanonicalName()); System.out.println(helloService.sayHello(new URL(&quot;file&quot;, &quot;/home&quot;, 0), &quot;DENNIS&quot;)); &#125;&#125; 总结暂无]]></content>
+      <categories>
+        <category>dubbo</category>
+      </categories>
+      <tags>
+        <tag>dubbo</tag>
+        <tag>SPI</tag>
+      </tags>
+  </entry>
+  <entry>
     <title><![CDATA[Hello World]]></title>
     <url>%2F2019%2F06%2F08%2Fhello-world%2F</url>
     <content type="text"><![CDATA[Welcome to Hexo! This is your very first post. Check documentation for more info. If you get any problems when using Hexo, you can find the answer in troubleshooting or you can ask me on GitHub. Quick StartCreate a new post1$ hexo new "My New Post" More info: Writing Run server1$ hexo server More info: Server Generate static files1$ hexo generate More info: Generating Deploy to remote sites1$ hexo deploy More info: Deployment]]></content>

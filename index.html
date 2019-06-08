@@ -14,7 +14,7 @@
   
 
 
-<html class="theme-next gemini use-motion" lang>
+<html class="theme-next gemini use-motion" lang="zh-CN">
 <head><meta name="generator" content="Hexo 3.8.0">
   <meta charset="UTF-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -98,9 +98,9 @@
 
   <meta property="og:type" content="website">
 <meta property="og:title" content="烂笔头">
-<meta property="og:url" content="http://yoursite.com/index.html">
+<meta property="og:url" content="https://www.yiyiers.com/index.html">
 <meta property="og:site_name" content="烂笔头">
-<meta property="og:locale" content="default">
+<meta property="og:locale" content="zh-CN">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="烂笔头">
 
@@ -112,7 +112,7 @@
 
   
   
-  <link rel="canonical" href="http://yoursite.com/">
+  <link rel="canonical" href="https://www.yiyiers.com/">
 
 
 
@@ -163,7 +163,7 @@
 
 </head>
 
-<body itemscope itemtype="http://schema.org/WebPage" lang="default">
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-CN">
 
   
   
@@ -195,7 +195,7 @@
   </div>
 
   <div class="site-nav-toggle">
-    <button aria-label="Toggle navigation bar">
+    <button aria-label="切换导航栏">
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
       <span class="btn-bar"></span>
@@ -223,7 +223,7 @@
 
     
 
-    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>Home</a>
+    <a href="/" rel="section"><i class="menu-item-icon fa fa-fw fa-home"></i> <br>首页</a>
 
   </li>
         
@@ -240,7 +240,7 @@
 
     
 
-    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>Archives</a>
+    <a href="/archives/" rel="section"><i class="menu-item-icon fa fa-fw fa-archive"></i> <br>归档</a>
 
   </li>
         
@@ -257,7 +257,7 @@
 
     
 
-    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>About</a>
+    <a href="/about/" rel="section"><i class="menu-item-icon fa fa-fw fa-user"></i> <br>关于</a>
 
   </li>
 
@@ -268,7 +268,7 @@
             <a href="javascript:;" class="popup-trigger">
           
             
-              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>Search</a>
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br>搜索</a>
         </li>
       
     </ul>
@@ -288,7 +288,7 @@
       <i class="fa fa-times-circle"></i>
     </span>
     <div class="local-search-input-wrapper">
-      <input autocomplete="off" placeholder="Searching..." spellcheck="false" type="text" id="local-search-input">
+      <input autocomplete="off" placeholder="搜索..." spellcheck="false" type="text" id="local-search-input">
     </div>
   </div>
   <div id="local-search-result"></div>
@@ -338,7 +338,189 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2019/06/08/hello-world/">
+    <link itemprop="mainEntityOfPage" href="https://www.yiyiers.com/2019/06/08/dubbo-spi-test/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="兰桥怀远">
+      <meta itemprop="description" content>
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="烂笔头">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">
+                
+                
+                <a href="/2019/06/08/dubbo-spi-test/" class="post-title-link" itemprop="url">Dubbo SPI 扩展实现测试</a>
+              
+            
+          </h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+
+            
+            
+            
+
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+
+              
+                
+              
+
+              <time title="创建时间：2019-06-08 15:48:20 / 修改时间：17:49:41" itemprop="dateCreated datePublished" datetime="2019-06-08T15:48:20+08:00">2019-06-08</time>
+            
+
+            
+              
+
+              
+            
+          </span>
+
+          
+            <span class="post-category">
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing"><a href="/categories/dubbo/" itemprop="url" rel="index"><span itemprop="name">dubbo</span></a></span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        
+          
+            <p>Dubbo SPI 测试</p>
+<p>Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，<a href="http://dubbo.apache.org/zh-cn/docs/dev/SPI.html" target="_blank" rel="noopener">官方文档</a></p>
+<blockquote>
+<p>JDK 标准 SPI 会主动实例化扩展点的所有实现，如果扩展点初始化很耗时，而且如果该扩展点被加载后不使用，也是资源浪费</p>
+<p>通过 setter 方式，实现了 IOC &amp; AOP</p>
+</blockquote>
+<h2 id="ExtensionLoader-的简单测试"><a href="#ExtensionLoader-的简单测试" class="headerlink" title="ExtensionLoader 的简单测试"></a>ExtensionLoader 的简单测试</h2><p>HelloService 接口</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.lankio.learning.dubbo;</span><br><span class="line"></span><br><span class="line">import org.apache.dubbo.common.URL;</span><br><span class="line">import org.apache.dubbo.common.extension.Adaptive;</span><br><span class="line">import org.apache.dubbo.common.extension.SPI;</span><br><span class="line"></span><br><span class="line">@SPI(&quot;dennis&quot;)</span><br><span class="line">public interface HelloService &#123;</span><br><span class="line"></span><br><span class="line">	String sayHello(String hello);</span><br><span class="line"></span><br><span class="line">	@Adaptive</span><br><span class="line">	String sayHello(URL url, String hello);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HelloService 接口的普通实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class HelloServiceImpl implements HelloService &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String sayHello(String hello) &#123;</span><br><span class="line"></span><br><span class="line">		return &quot;Hello! &quot; + hello;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String sayHello(URL url, String hello) &#123;</span><br><span class="line">		return url + &quot;, Hello! &quot; + hello;</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>HelloService 接口的自适应扩展实现</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Adaptive // Annotation must</span><br><span class="line">public class AdaptiveHelloServiceImpl implements HelloService &#123;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String sayHello(String hello) &#123;</span><br><span class="line"></span><br><span class="line">		return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(hello);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">	@Override</span><br><span class="line">	public String sayHello(URL url, String hello) &#123;</span><br><span class="line"></span><br><span class="line">		return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(url, hello);</span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<p>配置文件 META-INF/dubbo/com.lankio.learning.dubbo.HelloService</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># HelloService 默认扩展实现</span><br><span class="line">dennis=com.lankio.learning.dubbo.service.HelloServiceImpl</span><br><span class="line"></span><br><span class="line"># 人工手动实现的自适应扩展实现，注释掉该实现，ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension() 会</span><br><span class="line"># 自动生成自适应扩展实现</span><br><span class="line">adaptive=com.lankio.learning.dubbo.service.AdaptiveHelloServiceImpl</span><br></pre></td></tr></table></figure>
+
+<p>ExtensionLoader 测试</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ExtensionLoaderTest &#123;</span><br><span class="line"></span><br><span class="line">	public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">		// General service implement</span><br><span class="line">		HelloService helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getExtension(&quot;dennis&quot;);</span><br><span class="line">		System.out.println(helloService.getClass().getCanonicalName());</span><br><span class="line">		System.out.println(helloService.sayHello(&quot;DENNIS&quot;));</span><br><span class="line"></span><br><span class="line">		// Adaptive service implement</span><br><span class="line">		helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension();</span><br><span class="line">		System.out.println(helloService.getClass().getCanonicalName());</span><br><span class="line">		System.out.println(helloService.sayHello(new URL(&quot;file&quot;, &quot;/home&quot;, 0), &quot;DENNIS&quot;));</span><br><span class="line"></span><br><span class="line">	&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>暂无</p>
+
+          
+        
+      
+    </div>
+
+    
+
+    
+    
+    
+
+    
+
+    
+      
+    
+    
+
+    
+
+    <footer class="post-footer">
+      
+
+      
+
+      
+
+      
+      
+        <div class="post-eof"></div>
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+    
+      
+
+  
+
+  
+  
+  
+
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="https://www.yiyiers.com/2019/06/08/hello-world/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="兰桥怀远">
@@ -376,14 +558,14 @@
                 <i class="fa fa-calendar-o"></i>
               </span>
               
-                <span class="post-meta-item-text">Posted on</span>
+                <span class="post-meta-item-text">发表于</span>
               
 
               
                 
               
 
-              <time title="Created: 2019-06-08 11:24:17 / Modified: 11:42:11" itemprop="dateCreated datePublished" datetime="2019-06-08T11:24:17+08:00">2019-06-08</time>
+              <time title="创建时间：2019-06-08 15:06:03 / 修改时间：11:42:11" itemprop="dateCreated datePublished" datetime="2019-06-08T15:06:03+08:00">2019-06-08</time>
             
 
             
@@ -520,12 +702,29 @@
                 
                   <a href="/archives/">
                 
-                    <span class="site-state-item-count">1</span>
-                    <span class="site-state-item-name">posts</span>
+                    <span class="site-state-item-count">2</span>
+                    <span class="site-state-item-name">日志</span>
                   </a>
                 </div>
               
 
+              
+                
+                
+                <div class="site-state-item site-state-categories">
+                  
+                    
+                      <a href="/categories/">
+                    
+                  
+                    
+                    
+                      
+                    
+                    <span class="site-state-item-count">1</span>
+                    <span class="site-state-item-name">分类</span>
+                  </a>
+                </div>
               
 
               
@@ -543,8 +742,12 @@
                     
                       
                     
-                    <span class="site-state-item-count">2</span>
-                    <span class="site-state-item-name">tags</span>
+                      
+                    
+                      
+                    
+                    <span class="site-state-item-count">4</span>
+                    <span class="site-state-item-name">标签</span>
                   </a>
                 </div>
               
@@ -604,7 +807,7 @@
 </div>
 
 
-  <div class="powered-by">Powered by <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a></div>
+  <div class="powered-by">由 <a href="https://hexo.io" class="theme-link" rel="noopener" target="_blank">Hexo</a> 强力驱动</div>
 
 
 
@@ -612,7 +815,7 @@
 
 
 
-  <div class="theme-info">Theme – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
+  <div class="theme-info">主题 – <a href="https://theme-next.org" class="theme-link" rel="noopener" target="_blank">NexT.Gemini</a></div>
 
 
 

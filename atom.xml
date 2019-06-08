@@ -5,9 +5,9 @@
   <subtitle>好记心不如烂笔头</subtitle>
   <link href="/atom.xml" rel="self"/>
   
-  <link href="http://yoursite.com/"/>
-  <updated>2019-06-08T03:42:11.981Z</updated>
-  <id>http://yoursite.com/</id>
+  <link href="https://www.yiyiers.com/"/>
+  <updated>2019-06-08T09:49:41.118Z</updated>
+  <id>https://www.yiyiers.com/</id>
   
   <author>
     <name>兰桥怀远</name>
@@ -17,11 +17,39 @@
   <generator uri="http://hexo.io/">Hexo</generator>
   
   <entry>
+    <title>Dubbo SPI 扩展实现测试</title>
+    <link href="https://www.yiyiers.com/2019/06/08/dubbo-spi-test/"/>
+    <id>https://www.yiyiers.com/2019/06/08/dubbo-spi-test/</id>
+    <published>2019-06-08T07:48:20.000Z</published>
+    <updated>2019-06-08T09:49:41.118Z</updated>
+    
+    <content type="html"><![CDATA[<p>Dubbo SPI 测试</p><p>Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，<a href="http://dubbo.apache.org/zh-cn/docs/dev/SPI.html" target="_blank" rel="noopener">官方文档</a></p><blockquote><p>JDK 标准 SPI 会主动实例化扩展点的所有实现，如果扩展点初始化很耗时，而且如果该扩展点被加载后不使用，也是资源浪费</p><p>通过 setter 方式，实现了 IOC &amp; AOP</p></blockquote><h2 id="ExtensionLoader-的简单测试"><a href="#ExtensionLoader-的简单测试" class="headerlink" title="ExtensionLoader 的简单测试"></a>ExtensionLoader 的简单测试</h2><p>HelloService 接口</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">package com.lankio.learning.dubbo;</span><br><span class="line"></span><br><span class="line">import org.apache.dubbo.common.URL;</span><br><span class="line">import org.apache.dubbo.common.extension.Adaptive;</span><br><span class="line">import org.apache.dubbo.common.extension.SPI;</span><br><span class="line"></span><br><span class="line">@SPI(&quot;dennis&quot;)</span><br><span class="line">public interface HelloService &#123;</span><br><span class="line"></span><br><span class="line">String sayHello(String hello);</span><br><span class="line"></span><br><span class="line">@Adaptive</span><br><span class="line">String sayHello(URL url, String hello);</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>HelloService 接口的普通实现</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">public class HelloServiceImpl implements HelloService &#123;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public String sayHello(String hello) &#123;</span><br><span class="line"></span><br><span class="line">return &quot;Hello! &quot; + hello;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public String sayHello(URL url, String hello) &#123;</span><br><span class="line">return url + &quot;, Hello! &quot; + hello;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>HelloService 接口的自适应扩展实现</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">@Adaptive // Annotation must</span><br><span class="line">public class AdaptiveHelloServiceImpl implements HelloService &#123;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public String sayHello(String hello) &#123;</span><br><span class="line"></span><br><span class="line">return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(hello);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">@Override</span><br><span class="line">public String sayHello(URL url, String hello) &#123;</span><br><span class="line"></span><br><span class="line">return ExtensionLoader.getExtensionLoader(HelloService.class).getDefaultExtension().sayHello(url, hello);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><p>配置文件 META-INF/dubbo/com.lankio.learning.dubbo.HelloService</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"># HelloService 默认扩展实现</span><br><span class="line">dennis=com.lankio.learning.dubbo.service.HelloServiceImpl</span><br><span class="line"></span><br><span class="line"># 人工手动实现的自适应扩展实现，注释掉该实现，ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension() 会</span><br><span class="line"># 自动生成自适应扩展实现</span><br><span class="line">adaptive=com.lankio.learning.dubbo.service.AdaptiveHelloServiceImpl</span><br></pre></td></tr></table></figure><p>ExtensionLoader 测试</p><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">public class ExtensionLoaderTest &#123;</span><br><span class="line"></span><br><span class="line">public static void main(String[] args) &#123;</span><br><span class="line"></span><br><span class="line">// General service implement</span><br><span class="line">HelloService helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getExtension(&quot;dennis&quot;);</span><br><span class="line">System.out.println(helloService.getClass().getCanonicalName());</span><br><span class="line">System.out.println(helloService.sayHello(&quot;DENNIS&quot;));</span><br><span class="line"></span><br><span class="line">// Adaptive service implement</span><br><span class="line">helloService = ExtensionLoader.getExtensionLoader(HelloService.class).getAdaptiveExtension();</span><br><span class="line">System.out.println(helloService.getClass().getCanonicalName());</span><br><span class="line">System.out.println(helloService.sayHello(new URL(&quot;file&quot;, &quot;/home&quot;, 0), &quot;DENNIS&quot;));</span><br><span class="line"></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure><h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><p>暂无</p>]]></content>
+    
+    <summary type="html">
+    
+      
+      
+        &lt;p&gt;Dubbo SPI 测试&lt;/p&gt;
+&lt;p&gt;Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，&lt;a href=&quot;http://dubbo.apache.org/zh-cn/docs/dev/SP
+      
+    
+    </summary>
+    
+      <category term="dubbo" scheme="https://www.yiyiers.com/categories/dubbo/"/>
+    
+    
+      <category term="dubbo" scheme="https://www.yiyiers.com/tags/dubbo/"/>
+    
+      <category term="SPI" scheme="https://www.yiyiers.com/tags/SPI/"/>
+    
+  </entry>
+  
+  <entry>
     <title>Hello World</title>
-    <link href="http://yoursite.com/2019/06/08/hello-world/"/>
-    <id>http://yoursite.com/2019/06/08/hello-world/</id>
-    <published>2019-06-08T03:24:17.874Z</published>
-    <updated>2019-06-08T03:42:11.981Z</updated>
+    <link href="https://www.yiyiers.com/2019/06/08/hello-world/"/>
+    <id>https://www.yiyiers.com/2019/06/08/hello-world/</id>
+    <published>2019-06-08T07:06:03.456Z</published>
+    <updated>2019-06-08T03:42:11.000Z</updated>
     
     <content type="html"><![CDATA[<p>Welcome to <a href="https://hexo.io/" target="_blank" rel="noopener">Hexo</a>! This is your very first post. Check <a href="https://hexo.io/docs/" target="_blank" rel="noopener">documentation</a> for more info. If you get any problems when using Hexo, you can find the answer in <a href="https://hexo.io/docs/troubleshooting.html" target="_blank" rel="noopener">troubleshooting</a> or you can ask me on <a href="https://github.com/hexojs/hexo/issues" target="_blank" rel="noopener">GitHub</a>.</p><h2 id="Quick-Start"><a href="#Quick-Start" class="headerlink" title="Quick Start"></a>Quick Start</h2><h3 id="Create-a-new-post"><a href="#Create-a-new-post" class="headerlink" title="Create a new post"></a>Create a new post</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo new <span class="string">"My New Post"</span></span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/writing.html" target="_blank" rel="noopener">Writing</a></p><h3 id="Run-server"><a href="#Run-server" class="headerlink" title="Run server"></a>Run server</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo server</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/server.html" target="_blank" rel="noopener">Server</a></p><h3 id="Generate-static-files"><a href="#Generate-static-files" class="headerlink" title="Generate static files"></a>Generate static files</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo generate</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/generating.html" target="_blank" rel="noopener">Generating</a></p><h3 id="Deploy-to-remote-sites"><a href="#Deploy-to-remote-sites" class="headerlink" title="Deploy to remote sites"></a>Deploy to remote sites</h3><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ hexo deploy</span><br></pre></td></tr></table></figure><p>More info: <a href="https://hexo.io/docs/deployment.html" target="_blank" rel="noopener">Deployment</a></p>]]></content>
     
@@ -35,9 +63,9 @@
     </summary>
     
     
-      <category term="GPS" scheme="http://yoursite.com/tags/GPS/"/>
+      <category term="GPS" scheme="https://www.yiyiers.com/tags/GPS/"/>
     
-      <category term="TEST" scheme="http://yoursite.com/tags/TEST/"/>
+      <category term="TEST" scheme="https://www.yiyiers.com/tags/TEST/"/>
     
   </entry>
   

@@ -104,7 +104,7 @@
 <meta property="og:site_name" content="烂笔头">
 <meta property="og:description" content="Dubbo-2.7.1 SPI 测试 Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，官方文档   JDK 标准 SPI 会主动实例化扩展点的所有实现，如果扩展点初始化很耗时，而且如果该扩展点被加载后不使用，也是资源浪费 通过 setter 方式，实现了 IOC &amp;amp; AOP   ExtensionLoad">
 <meta property="og:locale" content="zh-CN">
-<meta property="og:updated_time" content="2019-06-09T03:04:14.621Z">
+<meta property="og:updated_time" content="2019-06-12T03:11:15.795Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Dubbo SPI 扩展实现测试">
 <meta name="twitter:description" content="Dubbo-2.7.1 SPI 测试 Dubbo 提供了类似 JDK 标准 SPI(Service Provider Interface)的一套服务扩展实现，而且有所加强，官方文档   JDK 标准 SPI 会主动实例化扩展点的所有实现，如果扩展点初始化很耗时，而且如果该扩展点被加载后不使用，也是资源浪费 通过 setter 方式，实现了 IOC &amp;amp; AOP   ExtensionLoad">
@@ -402,7 +402,7 @@
                 
                   <span class="post-meta-item-text">更新于</span>
                 
-                <time title="修改时间：2019-06-09 11:04:14" itemprop="dateModified" datetime="2019-06-09T11:04:14+08:00">2019-06-09</time>
+                <time title="修改时间：2019-06-12 11:11:15" itemprop="dateModified" datetime="2019-06-12T11:11:15+08:00">2019-06-12</time>
               
             
           </span>
@@ -491,6 +491,7 @@
 
 <h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><ol>
 <li>ExtensionLoader 是个对象工厂，每个接口对应一个ExtensionLoader 实例，缓存在 ExtensionLoader 的静态变量中（成员变量中也有缓存容器)，而且只有使用到接口的实现时才会主动创建具体的接口实例</li>
+<li>每个具体的扩展实现都会被其对应的 Wrapper 实现来代理包装一下</li>
 <li>自动激活的扩展实现，通常有多个实现，列如 Filter, Listener 等，可以根据 URL 参数自动激活指定实现</li>
 </ol>
 
